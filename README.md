@@ -207,6 +207,15 @@ CREATE TABLE `user_role` (
 
 4: After that import the project and open File StoreConstants.java and specify your driver name,username,password etc.(prior to that you must have mysql driver in your class path)
 
+   public static final String JDBC_DRIVER="com.mysql.jdbc.Driver";
+     public static final String Connection_URL="jdbc:mysql://localhost/";
+      public static final String USER="root";
+       public static final String Password="your password";
+        public static final String Database="shoestore";
+        public static final String IMAGE_SERVER_PATH ="your image server path it should be absolute";
+          public static final String IMAGE_RELATIVE_PATH ="productImages : it should be relative";
+
+
 5: Deploy The application
 
 6: Before that create one admin user and role ,user_role 
