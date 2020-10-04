@@ -24,14 +24,60 @@ crossorigin="anonymous"></script>
 
 <!-- Bootstrap files (jQuery first, then Popper.js, then Bootstrap JS) -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+          <link rel="stylesheet" href="css/store.css">
+          <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+   <script src="js/store.js"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-          <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/store.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
  <script src="js/store.js"></script>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <script>
+  $( function() {
+ 
+       var availableTags=[];  
+        $.ajax({
+		url: "SearchServlet",
+		type: 'POST',
+		dataType: 'json',
+		//data: JSON.stringify(article),
+		contentType: 'application/json',
+		mimeType: 'application/json',
+		error : function(e) {
+
+                console.log("Error Occured",e);
+            },
+            success : function(data) {
+                var receivedData = [];
+               
+                availableTags = data;
+                 $( "#tags" ).autocomplete({
+      source: availableTags
+               });
+              /**  $.each(data.jsonArray, function(index) {
+                    $.each(data.jsonArray[index], function(key, value) {
+                        var point = [];
+
+                            point.push(key);
+                            point.push(value);
+                            receivedData.push(point);
+
+                        }); 
+                });**/
+
+            }
+	});
+        
+       console.log(availableTags);  
+   
+  } );
+  </script> 
     
         <style>
 * {

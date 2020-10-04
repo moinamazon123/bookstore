@@ -7,6 +7,13 @@
 <%@page import="com.shoestore.src.StoreConstants"%>
 <%@page import="com.shoestore.model.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+        
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="com.shoestore.src.DBConnection"%>
+<%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,19 +22,61 @@
          <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
           <link rel="stylesheet" href="css/store.css">
           <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+          <link rel="stylesheet" href="css/store.css">
+          <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" type="text/javascript"></script>
    <script src="js/store.js"></script>
 
   <link rel="stylesheet" href="css/store.css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+ <script src="js/store.js"></script>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <script>
+  $( function() {
+ 
+       var availableTags=[];  
+        $.ajax({
+		url: "SearchServlet",
+		type: 'POST',
+		dataType: 'json',
+		//data: JSON.stringify(article),
+		contentType: 'application/json',
+		mimeType: 'application/json',
+		error : function(e) {
+
+                console.log("Error Occured",e);
+            },
+            success : function(data) {
+                var receivedData = [];
+               
+                availableTags = data;
+                 $( "#tags" ).autocomplete({
+      source: availableTags
+               });
+              /**  $.each(data.jsonArray, function(index) {
+                    $.each(data.jsonArray[index], function(key, value) {
+                        var point = [];
+
+                            point.push(key);
+                            point.push(value);
+                            receivedData.push(point);
+
+                        }); 
+                });**/
+
+            }
+	});
         
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="com.shoestore.src.DBConnection"%>
-<%@page import="java.sql.Connection"%>
+       console.log(availableTags);  
+   
+  } );
+  </script> 
+
 <style>
 body {
   margin: 0;
@@ -169,7 +218,7 @@ $(document).ready(function() {
 <a href="orderList.jsp">Orders</a>
   
   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-           <form id="searchFRM" class="form-inline my-2 my-lg-0">
+           <form id="searchFRM" action="productList.jsp"  class="form-inline my-2 my-lg-0">
                 <div class="input-group input-group-sm">
                     <input type="text" class="form-control" id="searchBtn" aria-label="Small" id="searchKW" name="searchKW" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
                     <div class="input-group-append">
@@ -301,7 +350,11 @@ $(document).ready(function() {
                 rs = null;
              
         st= con.createStatement();
+        if(request.getParameter("searchKW")!=null){
+              rs =st.executeQuery("select * from shoestore.product where product_name='"+request.getParameter("searchKW")+"'");
+        }else {
         rs =st.executeQuery("select * from shoestore.product");
+        }
         
                     while(rs.next()){
                        Product prod = new Product();

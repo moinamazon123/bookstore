@@ -138,9 +138,22 @@ public class LoginServlet extends HttpServlet {
             }
             
             } else if(event.equals("register"))  {
+                String existingEmail =null;
+                  Statement emailQuery = con.createStatement();
+             rs = emailQuery.executeQuery("Select email from user where email='"+request.getParameter("email")+"'");
+      
+          while(rs.next()){
+                existingEmail = rs.getString(1);
+            }
                 
-                System.out.println("%%%%%%%%%%%%%%%%%% Event "+event);
+                
+                System.out.println("%%%%%%%%%%%%%%%%%% Event "+event+existingEmail);
       // the mysql insert statement
+      if(existingEmail!=null) {
+              session.setAttribute("erMsg", "Email address already Taken  ! Please Register Again");
+            response.sendRedirect("login.jsp");    
+      }
+      }else {
       String query = " insert into user (email, fullName, password, repassword, phone)"
         + " values (?, ?, ?, ?, ?)";
   int userId =0;
@@ -154,6 +167,7 @@ public class LoginServlet extends HttpServlet {
       
        preparedStmt.execute();
        
+       MailUtility.SendMail(StoreConstants.MAIL_SUBJECT_WELCOME, "Thanks for registering with our Site", request.getParameter("email"));
        /** Fetching User id **/
        
       Statement userIdst = con.createStatement();
@@ -179,6 +193,7 @@ public class LoginServlet extends HttpServlet {
           response.sendRedirect("login.jsp?msg=Registration Successful ! Please Login");    
             
         }
+          
     }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

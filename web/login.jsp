@@ -147,20 +147,20 @@ label{
                                 <div class="form-group">
                                     <label for="lastname" class="col-md-4 control-label">Password</label>
                                     <div class="col-md-8">
-                                        <input type="password" class="form-control input-sm" id="pass" name="pass" placeholder="Last Name">
+                                        <input type="password" class="form-control input-sm" id="pass" name="pass" placeholder="Password">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="password" class="col-md-4 control-label">Confirm Password</label>
                                     <div class="col-md-8">
-                                        <input type="password" class="form-control input-sm"  id="confrmpasss" name="confrmpass" placeholder="Password">
+                                        <input type="password" class="form-control input-sm"  id="confrmpasss" name="confrmpass" placeholder="Confirm Password">
                                     </div>
                                 </div>
                                     
                                 <div class="form-group">
                                     <label for="icode" class="col-md-4 control-label">Phone Number</label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control input-sm" name="phone" placeholder="">
+                                        <input type="text" class="form-control input-sm" name="phone" placeholder="Phone number">
                                     </div>
                                 </div>
 

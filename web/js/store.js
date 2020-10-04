@@ -142,8 +142,8 @@ $(document).ready(function(){
     });
   
   $("#searchBtn").click(function(){
-      alert();
-        $('#searchFRM').attr('action', 'searchAction.jsp?searchKW='+$("#searchKW").val());
+    
+        $('#searchFRM').attr('action', 'productList.jsp?searchKW='+$("#searchKW").val());
          $('#searchFRM').submit();
   });
     

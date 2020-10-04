@@ -182,25 +182,24 @@ $(document).ready(function() {
 	</li>
 	
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            <form class="form-inline my-2 my-lg-0">
-                <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-secondary btn-number">
-                            <i class="fa fa-search"></i>
+          <form id="searchFRM" action="productList.jsp" class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm" >
+                    <input id="tags" type="text" class="form-control" aria-label="Small" id="searchKW" name="searchKW" aria-describedby="inputGroup-sizing-sm" placeholder="Search...">
+                 
+                        <button  style="margin-top: -15%;
+    margin-left: 110%;" type="submit" id="searchBtn1" class="btn btn-secondary">
+                            <i class="fa fa-search"></i>  
                         </button>
-                    </div>
+                    
                 </div>
-                <a class="btn btn-success btn-sm ml-3" href="cartPage.jsp">
-                    <i class="fa fa-shopping-cart"></i> Cart
-                    <span class="badge badge-light"><%=(Integer)session.getAttribute("cartItemCount")!=null?(Integer)session.getAttribute("cartItemCount"):0%></span>
-                </a>
-             
-                  <a class="btn btn-success btn-sm ml-3" href="signout.jsp">
+                 <a style="margin-left: 110%;margin-top: -20%;color:white" href="signout.jsp">
                     <i class="fa fa-sign-out"></i> Log Out
                  
-                </a>
+                </a> 
+           
+                
             </form>
+      
         
 </ul>
 
